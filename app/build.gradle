@@ -1,0 +1,31 @@
+apply plugin: 'com.android.model.application'
+
+model {
+    android {
+        compileSdkVersion = 19
+        buildToolsVersion = "23.0.2"
+
+        defaultConfig.with {
+            applicationId = "src.blog.neonigma"
+            minSdkVersion.apiLevel = 17
+            targetSdkVersion.apiLevel = 19
+            versionCode = 1
+            versionName = "1.0"
+        }
+    }
+
+    android.ndk {
+        moduleName = "mixed_sample"
+        stl = "stlport_static"
+        ldLibs.addAll(["dl", "log"])
+        CFlags.addAll("-fexceptions")
+        cppFlags.addAll("-fexceptions")
+    }
+
+    android.buildTypes {
+        release {
+            minifyEnabled = true
+            proguardFiles.add(file("proguard-rules.pro"))
+        }
+    }
+}
